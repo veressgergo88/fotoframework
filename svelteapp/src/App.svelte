@@ -28,4 +28,36 @@
 </script>
 
 <main>
+  <div class="card">
+
+    {#if page === "home"}
+      <div>
+        <button on:click={() => page = "about"}>To about</button>
+        <button on:click={search}>Search</button>
+
+        {#if isLoading}
+          <p>Loading...</p>
+          {:else}
+            
+          {#each images as image}
+            <p>{ image.title }</p>
+            <img src={ image.url } alt={ image.title }>
+          {/each}
+        {/if}
+
+        {#if notificationText}
+          <h1>{ notificationText }</h1>
+        {/if}
+
+      </div> 
+    {/if}
+
+    {#if page === "about"}
+      <div>
+        <button on:click={() => page = "home"}>To Home</button>
+      
+      </div>
+    {/if}
+
+  </div>
 </main>
