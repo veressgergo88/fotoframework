@@ -1,0 +1,24 @@
+<div *ngIf="page === 'home'; else about">
+  <h1>Home page</h1>
+  <button (click)="page = 'about'">To about</button>
+</div>
+
+<ng-template #about>
+  <div>
+    <h1>About page</h1>
+    <button (click)="page = 'home'">To home</button>
+  </div>
+</ng-template>
+
+<input type="text" placeholder="Title" [(ngModel)]="searchParam">
+<button (click)="searchParam = ''">Clear</button>
+<button (click)="search()">Search</button>
+
+<div *ngIf="isLoading">Loading...</div>
+
+<div *ngFor="let image of images">
+  <p>{{ image.title }}</p>
+  <img src="{{ image.url }}" alt="{{ image.title }}" />
+</div>
+
+<h1 *ngIf="notificationText">{{ notificationText }}</h1>

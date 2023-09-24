@@ -15,14 +15,17 @@
 
   let page = "home"
 
+  let searchParam = ""
+
   const search = async () => {
     isLoading = true
-    const response = await loadImages()
+    const response = await loadImages(searchParam)
     isLoading = false
     if (!response.success)
       return notificationText = response.error
     const data = response.data
     images = data.map(img => ({...img, smallAmount: 0, largeAmount: 0}))
+    notificationText = null
   }
 
 </script>
@@ -33,6 +36,8 @@
     {#if page === "home"}
       <div>
         <button on:click={() => page = "about"}>To about</button>
+        <input type="text" placeholder="Title" bind:value={searchParam}>
+        <button on:click={() => searchParam = ""}>Clear</button>
         <button on:click={search}>Search</button>
 
         {#if isLoading}
